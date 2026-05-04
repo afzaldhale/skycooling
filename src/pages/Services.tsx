@@ -1,79 +1,114 @@
-import { Link } from "react-router-dom";
-import { Refrigerator, WashingMachine, Snowflake, CheckCircle2, Phone, MessageCircle, ArrowRight } from "lucide-react";
-import fridgeImg from "@/assets/service-fridge.jpg";
-import washerImg from "@/assets/service-washer.jpg";
-import acImg from "@/assets/service-ac.jpg";
-import { telLink, whatsappLink } from "@/lib/site";
+import { SERVICES } from "@/data/services";
+import { LOCAL_KEYWORDS } from "@/data/locations";
+import { AreasWeServe } from "@/components/site/AreasWeServe";
+import { BookingForm } from "@/components/site/BookingForm";
+import { CTASection } from "@/components/site/CTASection";
+import { SEOHead } from "@/components/site/SEOHead";
+import { ServiceCard } from "@/components/site/ServiceCard";
+import { buildBreadcrumbSchema, buildLocalBusinessSchema } from "@/lib/schema";
 
-const services = [
-  {
-    id: "refrigerator", icon: Refrigerator, title: "Refrigerator Repair",
-    img: fridgeImg,
-    intro: "Single door, double door, side-by-side or French door — we repair every refrigerator type and brand.",
-    issues: ["Not cooling / over cooling", "Gas leak & refill", "Compressor / thermostat repair", "Water leakage from base", "Strange noise or vibration", "Door seal / gasket replacement"],
-    price: "Diagnosis from ₹299",
-  },
-  {
-    id: "washing-machine", icon: WashingMachine, title: "Washing Machine Repair",
-    img: washerImg,
-    intro: "Fully automatic, semi-automatic, top-load and front-load — we service every washing machine type.",
-    issues: ["Drum not spinning", "Motor & belt repair", "Water not draining", "Inlet / outlet valve issue", "Display / PCB problems", "Excessive noise or shaking"],
-    price: "Diagnosis from ₹249",
-  },
-  {
-    id: "ac", icon: Snowflake, title: "AC Repair & Service",
-    img: acImg,
-    intro: "Window, split or cassette AC — we handle service, repair, gas refill, installation and AMC.",
-    issues: ["AC not cooling", "Gas leak detection & refill", "Installation & uninstallation", "Deep cleaning service", "Water leakage from indoor unit", "Annual maintenance contract"],
-    price: "Service from ₹399",
-  },
-];
+const categoryLabels: Record<string, string> = {
+  "air-conditioning": "Air Conditioning Services",
+  refrigeration: "Refrigeration Services",
+  laundry: "Laundry Appliance Services",
+  kitchen: "Kitchen Appliance Services",
+  "commercial-cooling": "Commercial Cooling Solutions",
+};
 
 export default function ServicesPage() {
+  const groupedServices = Object.entries(
+    SERVICES.reduce<Record<string, typeof SERVICES>>((accumulator, service) => {
+      accumulator[service.category] ??= [];
+      accumulator[service.category].push(service);
+      return accumulator;
+    }, {}),
+  );
+
   return (
     <>
+      <SEOHead
+        title="Appliance Repair Services in Pune | AC, Fridge, Dishwasher & Cooling Solutions"
+        description="Explore appliance repair services in Pune for AC, refrigerator, washing machine, dishwasher, microwave, cold room, chiller, and commercial cooling systems."
+        path="/services"
+        keywords={[...LOCAL_KEYWORDS]}
+        structuredData={[
+          buildLocalBusinessSchema(),
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+          ]),
+        ]}
+      />
+
       <section className="bg-gradient-hero text-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
-          <span className="text-sm font-bold tracking-widest text-cta">OUR SERVICES</span>
-          <h1 className="mt-3 font-display text-4xl sm:text-5xl font-extrabold max-w-3xl">Every appliance, expertly repaired at your doorstep.</h1>
-          <p className="mt-5 text-lg text-white/85 max-w-2xl">Genuine spare parts. Trained technicians. Transparent pricing. Backed by a 90-day warranty.</p>
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+          <p className="text-sm font-bold tracking-[0.2em] text-cta">
+            OUR SERVICES
+          </p>
+          <h1 className="mt-4 max-w-4xl text-4xl font-extrabold sm:text-5xl">
+            Complete appliance repair and cooling solutions in Pune
+          </h1>
+          <p className="mt-5 max-w-3xl text-lg leading-8 text-white/85">
+            From AC repair service in Pune to cold storage repair, dishwasher
+            installation, deep freezer repair, and commercial refrigerator
+            support, we provide local, doorstep, and business-focused service
+            coverage.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            {[
+              "Same Day Service Available",
+              "Trusted Technicians",
+              "Affordable Pricing",
+              "Service Warranty",
+            ].map((item) => (
+              <span
+                key={item}
+                className="rounded-full bg-white/10 px-4 py-2 text-xs font-bold tracking-[0.16em] text-white ring-1 ring-white/15"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-16">
-          {services.map((s, i) => (
-            <div key={s.id} id={s.id} className={`grid lg:grid-cols-2 gap-10 items-center ${i % 2 === 1 ? "lg:[&>div:first-child]:order-2" : ""}`}>
-              <div className="relative">
-                <img src={s.img} alt={s.title} loading="lazy" width={1024} height={1024} className="rounded-3xl shadow-soft w-full h-auto object-cover" />
-                <div className="absolute top-4 left-4 grid place-items-center h-12 w-12 rounded-xl bg-white text-brand shadow-soft"><s.icon className="h-6 w-6" /></div>
+        <div className="mx-auto max-w-7xl space-y-14 px-4 sm:px-6 lg:px-8">
+          {groupedServices.map(([category, services]) => (
+            <section key={category}>
+              <div className="max-w-3xl">
+                <p className="text-sm font-bold tracking-[0.2em] text-brand">
+                  {categoryLabels[category]}
+                </p>
+                <h2 className="mt-3 text-3xl font-extrabold text-navy">
+                  {categoryLabels[category]}
+                </h2>
+                <p className="mt-3 text-base leading-7 text-muted-foreground">
+                  Trusted local technicians, fast response, and SEO-ready
+                  service pages built for customers searching for{" "}
+                  {services[0]?.shortTitle.toLowerCase()} and related help in
+                  Pune.
+                </p>
               </div>
-              <div>
-                <span className="text-sm font-bold text-brand tracking-widest">{s.price.toUpperCase()}</span>
-                <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-navy">{s.title}</h2>
-                <p className="mt-4 text-foreground/80 leading-relaxed">{s.intro}</p>
-                <h3 className="mt-6 font-semibold text-navy">Common issues we fix</h3>
-                <ul className="mt-3 grid sm:grid-cols-2 gap-2">
-                  {s.issues.map((p) => (
-                    <li key={p} className="flex items-start gap-2 text-sm text-foreground/85">
-                      <CheckCircle2 className="h-4 w-4 text-brand mt-0.5 shrink-0" /> {p}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-7 flex flex-wrap gap-3">
-                  <a href={telLink} className="inline-flex items-center gap-2 rounded-full bg-gradient-cta px-5 py-2.5 font-semibold text-cta-foreground shadow-soft">
-                    <Phone className="h-4 w-4" /> Get a Quote
-                  </a>
-                  <a href={whatsappLink(`Hi, I need ${s.title.toLowerCase()}.`)} className="inline-flex items-center gap-2 rounded-full bg-whatsapp px-5 py-2.5 font-semibold text-white">
-                    <MessageCircle className="h-4 w-4" /> WhatsApp
-                  </a>
-                  <Link to="/contact" className="inline-flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 font-semibold text-white">
-                    Book Service <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
+              <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                {services.map((service) => (
+                  <ServiceCard key={service.slug} service={service} />
+                ))}
               </div>
-            </div>
+            </section>
           ))}
+
+          <CTASection
+            title="Need emergency appliance or cooling support?"
+            description="Call or WhatsApp us for urgent booking help, same-day availability checks, and doorstep service scheduling across Pune and surrounding areas."
+          />
+
+          <AreasWeServe />
+
+          <BookingForm
+            title="Book any appliance repair service"
+            description="Choose your service, share your area, and tell us the issue. We will connect you with the right technician quickly."
+          />
         </div>
       </section>
     </>

@@ -1,10 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap");
 @import "tailwindcss" source(none);
-@source "../src";
 @import "tw-animate-css";
+@source "../src";
 
 @custom-variant dark (&:is(.dark *));
-
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap");
 
 /*
  * Design system definition.
@@ -105,8 +104,17 @@
   --whatsapp: oklch(0.68 0.17 150);
   --surface: oklch(0.985 0.005 250);
 
-  --gradient-hero: linear-gradient(135deg, oklch(0.22 0.07 260) 0%, oklch(0.35 0.15 255) 60%, oklch(0.5 0.18 252) 100%);
-  --gradient-cta: linear-gradient(135deg, oklch(0.72 0.19 50) 0%, oklch(0.65 0.21 35) 100%);
+  --gradient-hero: linear-gradient(
+    135deg,
+    oklch(0.22 0.07 260) 0%,
+    oklch(0.35 0.15 255) 60%,
+    oklch(0.5 0.18 252) 100%
+  );
+  --gradient-cta: linear-gradient(
+    135deg,
+    oklch(0.72 0.19 50) 0%,
+    oklch(0.65 0.21 35) 100%
+  );
   --shadow-soft: 0 10px 30px -12px oklch(0.22 0.07 260 / 0.18);
   --shadow-glow: 0 20px 50px -20px oklch(0.45 0.18 255 / 0.45);
   --chart-1: oklch(0.646 0.222 41.116);
@@ -171,9 +179,19 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4, h5 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 84px;
   }
 }
 

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="SkyCooling Pune appliance repair services">
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#0d2646" />
+      <stop offset="55%" stop-color="#1a4fb7" />
+      <stop offset="100%" stop-color="#2874ff" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="1030" cy="110" r="120" fill="#fbb041" opacity=".18" />
+  <circle cx="130" cy="540" r="160" fill="#ffffff" opacity=".08" />
+  <text x="90" y="170" fill="#fbb041" font-family="Arial, sans-serif" font-size="34" font-weight="700">SkyCooling Pune</text>
+  <text x="90" y="280" fill="#ffffff" font-family="Arial, sans-serif" font-size="72" font-weight="700">Appliance Repair</text>
+  <text x="90" y="360" fill="#ffffff" font-family="Arial, sans-serif" font-size="72" font-weight="700">&amp; Cooling Solutions</text>
+  <text x="90" y="435" fill="#d8e5ff" font-family="Arial, sans-serif" font-size="34">AC, refrigerator, dishwasher, washing machine,</text>
+  <text x="90" y="480" fill="#d8e5ff" font-family="Arial, sans-serif" font-size="34">cold room, chiller, and commercial service support in Pune.</text>
+  <rect x="90" y="520" width="280" height="56" rx="28" fill="#fbb041" />
+  <text x="230" y="557" fill="#0d2646" font-family="Arial, sans-serif" font-size="26" font-weight="700" text-anchor="middle">Same-Day Service</text>
+</svg>
