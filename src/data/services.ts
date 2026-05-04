@@ -4,6 +4,7 @@ import {
   CookingPot,
   Droplets,
   Fan,
+  PackageCheck,
   Refrigerator,
   Snowflake,
   WashingMachine,
